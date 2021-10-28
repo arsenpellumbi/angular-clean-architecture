@@ -1,0 +1,13 @@
+:host ::ng-deep {
+  .task-type-ToDo {
+    background-color: var(--blue-500);
+  }
+
+  .task-type-InProgress {
+    background-color: var(--yellow-500);
+  }
+
+  .task-type-Completed {
+    background-color: var(--green-500);
+  }
+}

@@ -1,0 +1,26 @@
+<div class="bg-white h-full shadow-3 pt-1">
+  <h2 class="pl-3">{{ project.title }}</h2>
+  <p-tabMenu [model]="tabItems"></p-tabMenu>
+  <div *ngIf="isDetailPathActive" class="pl-3">
+    <div class="flex align-content-center justify-content-between flex-wrap">
+      <h2>Title: {{ project.title }}</h2>
+      <p-button
+        type="button"
+        icon="mdi mdi-pencil"
+        class="mt-3 mr-3"
+        label="Edit"
+        (click)="onEditProject()"
+      ></p-button>
+    </div>
+    <h3>Description: {{ project.description }}</h3>
+    <h3>Date: {{ project.date }}</h3>
+  </div>
+  <div *ngIf="project.id && !isDetailPathActive">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<app-project-edit
+  [(visible)]="showProjectForm"
+  [(project)]="project"
+></app-project-edit>

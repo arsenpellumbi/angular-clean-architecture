@@ -1,0 +1,26 @@
+<div
+  class="app-static-menu w-15rem shadow-3"
+  [class]="{
+    'app-static-menu-collapsed': isSlimMenu
+  }"
+>
+  <div
+    class="
+      app-static-menu-header
+      p-3
+      w-full
+      border-bottom-1 border-300
+      flex
+      justify-content-between
+    "
+  >
+    <span class="app-static-menu-subheader">MENU</span>
+    <button
+      pButton
+      [icon]="isSlimMenu ? 'mdi mdi-menu-right' : 'mdi mdi-menu-left'"
+      class="p-button-text p-2 text-3xl"
+      (click)="onToggleMenu()"
+    ></button>
+  </div>
+  <p-panelMenu styleClass="h-full" [model]="items"> </p-panelMenu>
+</div>

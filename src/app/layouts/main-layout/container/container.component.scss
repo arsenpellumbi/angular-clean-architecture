@@ -1,0 +1,31 @@
+:host ::ng-deep {
+
+  @media (max-width: 768px) {
+      .app-container {
+        margin-left: 3rem !important;
+      }
+  }
+
+  .app-breadcrumb {
+    z-index: 100;
+    top: 60px;
+    margin-left: 15rem;
+    height: 40px;
+    position: sticky;
+    background: var(--white);
+    transition: margin-left 0.3s;
+
+    .p-breadcrumb {
+      height: 39px;
+      border: none;
+    }
+  }
+
+  .app-container {
+    min-height: 100vh;
+    margin-left: 15rem;
+    margin-top: 40px;
+    padding: 2rem;
+    transition: margin-left 0.3s;
+  }
+}

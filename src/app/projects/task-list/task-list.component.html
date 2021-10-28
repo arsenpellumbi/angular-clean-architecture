@@ -1,0 +1,123 @@
+<div class="border-0 p-3 flex flex-wrap">
+  <div class="w-full md:w-6">
+    <p-table
+      [value]="taskList.rows"
+      [paginator]="false"
+      [rowHover]="true"
+      class="w-full"
+      styleClass="p-datatable-striped w-full"
+      responsiveLayout="stack"
+      dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    >
+      <ng-template pTemplate="emptymessage">
+        <div>No data to display!;</div>
+      </ng-template>
+      <ng-template pTemplate="caption">
+        <div class="flex p-ai-center justify-content-between">
+          <h2 class="m-0">Tasks</h2>
+          <button
+            pButton
+            type="button"
+            class="ml-auto mr-2"
+            label="New"
+            icon="mdi mdi-plus"
+            (click)="onAddTask()"
+          ></button>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              type="text"
+              appDelayedInput
+              [(ngModel)]="search"
+              (delayedInput)="applyFilterGlobal($event)"
+              [delayTime]="600"
+              placeholder="Search..."
+            />
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th pSortableColumn="title">
+            Title <p-sortIcon field="title"></p-sortIcon>
+          </th>
+          <th>Description</th>
+          <th pSortableColumn="date">
+            Date <p-sortIcon field="date"></p-sortIcon>
+          </th>
+          <th pSortableColumn="type">
+            Type <p-sortIcon field="type"></p-sortIcon>
+          </th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-task let-columns="columns">
+        <tr>
+          <td><span class="p-column-title">Title:</span>{{ task.title }}</td>
+          <td>
+            <span class="p-column-title">Description:</span
+            >{{ task.description }}
+          </td>
+          <td><span class="p-column-title">Date:</span>{{ task.date }}</td>
+          <td>
+            <span class="p-column-title">Type:</span>
+            <span [class]="'p-1 text-white border-round uppercase text-sm font-bold task-type-' + task.typeLabel">{{
+              task.typeLabel
+            }}</span>
+          </td>
+          <td class="text-right">
+            <span class="flex pr-5">
+              <button
+                pButton
+                pRipple
+                icon="mdi mdi-eye"
+                class="mr-2"
+                (click)="onViewTask(task)"
+              ></button>
+              <button
+                pButton
+                pRipple
+                icon="mdi mdi-pencil"
+                class="p-button-success mr-2"
+                (click)="onEditTask(task)"
+              ></button>
+              <button
+                pButton
+                pRipple
+                icon="mdi mdi-delete"
+                class="p-button-warning"
+                (click)="onDeleteTask(task)"
+              ></button>
+            </span>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="summary">
+        <p-paginator
+          [rows]="taskList.pagination.pageSize"
+          [totalRecords]="taskList.pagination.totalCount"
+          [rowsPerPageOptions]="[6, 12, 24, 36]"
+          (onPageChange)="onPaginate($event)"
+        ></p-paginator>
+      </ng-template>
+    </p-table>
+  </div>
+  <div class="w-full md:w-6 flex">
+    <p-divider
+      class="h-full hidden md:inline-flex"
+      layout="vertical"
+    ></p-divider>
+    <div class="w-full mt-3 md:mt-0">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<app-task-edit
+  [(visible)]="showTaskForm"
+  [(task)]="taskToEdit"
+  [projectId]="projectId"
+></app-task-edit>

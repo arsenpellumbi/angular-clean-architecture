@@ -1,0 +1,96 @@
+<p-table
+  [value]="projectList.rows"
+  [paginator]="false"
+  [rowHover]="true"
+  styleClass="shadow-3 p-datatable-striped"
+  responsiveLayout="stack"
+  dataKey="id"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+>
+  <ng-template pTemplate="caption">
+    <div class="flex p-ai-center justify-content-between">
+      <h2 class="m-0">Projects</h2>
+      <button
+        pButton
+        type="button"
+        class="ml-auto mr-2"
+        label="New"
+        icon="mdi mdi-plus"
+        (click)="onAddProject()"
+      ></button>
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          appDelayedInput
+          [(ngModel)]="search"
+          (delayedInput)="applyFilterGlobal($event)"
+          [delayTime]="600"
+          placeholder="Search..."
+        />
+      </span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th pSortableColumn="title">
+        Title <p-sortIcon field="title"></p-sortIcon>
+      </th>
+      <th>Description</th>
+      <th pSortableColumn="date">
+        Date <p-sortIcon field="date"></p-sortIcon>
+      </th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-project let-columns="columns">
+    <tr>
+      <td><span class="p-column-title">Title:</span>{{ project.title }}</td>
+      <td>
+        <span class="p-column-title">Description:</span
+        >{{ project.description }}
+      </td>
+      <td><span class="p-column-title">Date:</span>{{ project.date }}</td>
+      <td class="text-right">
+        <span class="pr-5">
+          <button
+            pButton
+            pRipple
+            icon="mdi mdi-eye"
+            class="mr-2"
+            (click)="onViewProject(project)"
+          ></button>
+          <button
+            pButton
+            pRipple
+            icon="mdi mdi-pencil"
+            class="p-button-success mr-2"
+            (click)="onEditProject(project)"
+          ></button>
+          <button
+            pButton
+            pRipple
+            icon="mdi mdi-delete"
+            class="p-button-warning"
+            (click)="onDeleteProject(project)"
+          ></button>
+        </span>
+      </td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="summary">
+    <p-paginator
+      [rows]="projectList.pagination.pageSize"
+      [totalRecords]="projectList.pagination.totalCount"
+      [rowsPerPageOptions]="[6, 12, 24, 36]"
+      (onPageChange)="onPaginate($event)"
+    ></p-paginator>
+  </ng-template>
+</p-table>
+
+<app-project-edit
+  [(visible)]="showProjectForm"
+  [(project)]="projectToEdit"
+></app-project-edit>

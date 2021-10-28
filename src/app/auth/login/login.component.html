@@ -1,0 +1,48 @@
+<form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+  <div class="p-float-label p-input-icon-left field grid">
+    <i class="mdi mdi-email"></i>
+    <input
+      class="w-full"
+      id="email"
+      type="email"
+      placeholder="Email"
+      pInputText
+      ngModel
+      name="email"
+      required
+      email
+    />
+  </div>
+  <div class="p-float-label p-input-icon-left field grid">
+    <i class="mdi mdi-key"></i>
+    <input
+      class="w-full"
+      id="password"
+      type="password"
+      placeholder="Password"
+      pInputText
+      ngModel
+      name="password"
+      required
+    />
+  </div>
+  <div class="field-checkbox grid mt-3">
+    <p-checkbox label="Remember me"></p-checkbox>
+  </div>
+  <div class="grid mt-3">
+    <button
+      class="w-full mx-auto"
+      pButton
+      type="submit"
+      label="Sign in"
+      [disabled]="!authForm.valid"
+      [loading]="isLoading"
+    ></button>
+  </div>
+  <div class="grid mt-2">
+    <p>
+      Do not have an account? Sign up
+      <a class="ml-auto" routerLink="/register">here</a>.
+    </p>
+  </div>
+</form>

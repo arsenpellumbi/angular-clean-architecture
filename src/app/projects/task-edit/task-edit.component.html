@@ -1,0 +1,65 @@
+<p-dialog
+  [(visible)]="visible"
+  [style]="{ width: '450px' }"
+  [header]="task.id ? 'Edit Task' : 'Create Task'"
+  [modal]="true"
+  styleClass="p-fluid"
+  (onHide)="onCancel()"
+>
+  <ng-template pTemplate="content">
+    <form class="formgrid grid" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+      <div class="field col-12">
+        <label for="title">Title</label>
+        <input
+          type="text"
+          pInputText
+          id="title"
+          class="inputfield w-full"
+          formControlName="title"
+        />
+      </div>
+      <div class="field col-12">
+        <label for="description">Description</label>
+        <textarea
+          type="text"
+          pInputTextarea
+          id="description"
+          class="inputfield w-full"
+          formControlName="description"
+          rows="3"
+          cols="20"
+        ></textarea>
+      </div>
+
+      <div class="field col-12">
+        <label for="type">Type</label>
+        <p-dropdown
+          [options]="taskTypeOptions"
+          id="type"
+          formControlName="type"
+        ></p-dropdown>
+      </div>
+
+      <div class="flex ml-auto">
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Cancel"
+          icon="pi pi-times"
+          class="p-button-text"
+          (click)="onCancel()"
+        ></button>
+        <button
+          pButton
+          pRipple
+          type="submit"
+          label="Save"
+          icon="pi pi-check"
+          class="p-button-text"
+          [disabled]="!taskForm.valid"
+        ></button>
+      </div>
+    </form>
+  </ng-template>
+</p-dialog>

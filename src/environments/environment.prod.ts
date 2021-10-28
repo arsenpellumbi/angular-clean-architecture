@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  firebaseAPIKey: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+  projectManagerApiEndpoint: "http://localhost:5101/api/v1"
 };

@@ -1,0 +1,23 @@
+<div
+  *ngIf="!task"
+  class="flex align-content-evenly justify-content-center flex-wrap text-800"
+>
+  <h1>No task selected.</h1>
+</div>
+<div *ngIf="task" class="pl-3 text-800">
+  <div class="flex justify-content-between">
+    <h2>Title: {{ task.title }}</h2>
+    <p-button
+      type="button"
+      icon="mdi mdi-pencil"
+      class="mt-3 mr-3"
+      label="Edit"
+      (click)="onEditTask()"
+    ></p-button>
+  </div>
+  <h3>Description: {{ task.description }}</h3>
+  <h3>Date: {{ task.date }}</h3>
+  <h3>Type: {{ task.typeLabel }}</h3>
+
+  <app-task-edit [(visible)]="showTaskForm" [(task)]="task"></app-task-edit>
+</div>

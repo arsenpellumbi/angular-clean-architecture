@@ -1,0 +1,12 @@
+:host ::ng-deep {
+  .app-header {
+    z-index: 102;
+    top: 0;
+    position: fixed;
+    width: 100%;
+
+    .p-toolbar {
+        height: 60px;
+    }
+  }
+}
